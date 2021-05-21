@@ -1,0 +1,18 @@
+name: Symbolica - Build User Code
+author: Symbolica
+description: Builds user code in a way that is compatible with Symbolica
+inputs:
+  script:
+    description: The name of the build script to run relative to the root of your repository. Default symbolica.sh.
+    required: false
+    default: symbolica.sh
+  tag:
+    description: The tag of the Symbolica/build image to use.
+    required: true
+runs:
+  using: docker
+  image: Symbolica/build:${{ inputs.tag }}
+  entrypoint: |
+    echo $(pwd)
+    echo $GITHUB_WORKSPACE
+    ls -al
